@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "cjtheham <cjtheham@protonmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
     "@discordjs/rest": "^1.1.0",
     "axios": "^0.27.2",
