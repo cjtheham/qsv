@@ -18,6 +18,7 @@ client.on('interactionCreate', async interaction => {
 	const { commandName } = interaction;
     var licenseClass;
     var address;
+    var lastLotw;
 
 	if (commandName === 'callsign') {
         var call = interaction.options.getString('input');
@@ -42,13 +43,19 @@ client.on('interactionCreate', async interaction => {
                         address = `${response.data.address} \n ${response.data.city} ${response.data.state}, ${response.data.zip}`
                     }
 
+                    if (response.data.last_lotw == "") {
+                        lastLotw = "Never"
+                    } else {
+                        lastLotw = response.data.last_lotw;
+                    }
+
                     const callEmbed = new EmbedBuilder()
                         .setTitle(call.toUpperCase())
                         .addFields(
                             { name: 'Name', value: `${response.data.first_name} ${response.data.last_name}` },
                             { name: 'Class', value: licenseClass },
                             { name: 'Address', value: address },
-                            { name: 'Last LOTW Upload', value: response.data.last_lotw }
+                            { name: 'Last LOTW Upload', value: lastLotw }
                         )
                     interaction.reply({ embeds: [callEmbed] })
                 })
